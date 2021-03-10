@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Collections.Generic;
 
-
 namespace VirtualNewOverride
 {
     /// <summary>
@@ -138,9 +137,11 @@ namespace VirtualNewOverride
     {
         static void Main(string[] args)
         {
-            Person Me = new Person();
-            Debug.Assert();
+            DateTime Birthday = new DateTime (1999, 12, 31);
+            Person Me = new Person("Stavros", "Fakiolas", "fakiolass@stpaulsschool.org.uk", Birthday);
+            Debug.Assert(Me.ComputeAge(Birthday) == 22);
 
+            // please see UnitTest file
         }
     }
 
