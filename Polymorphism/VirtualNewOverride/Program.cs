@@ -9,6 +9,26 @@ namespace VirtualNewOverride
     ///     Allow MULTIPLE Interface but ONLY ONE Baseclass
     /// 
     /// </summary>
+
+    class Polymorphism
+    {
+        static void Main(string[] args)
+        {
+            DateTime Birthday = new DateTime (2004, 3, 16);
+            Person Me = new Person("Stavros", "Fakiolas", "fakiolass@stpaulsschool.org.uk", Birthday);
+            Person CloneMe = Me;
+
+            Console.WriteLine(Me.Zodiac());
+            Debug.Assert((int)Me.ComputeAge().TotalDays / 365 == 17);
+
+            while (Console.ReadKey().Key != ConsoleKey.Escape)
+                Console.WriteLine("press [Esc] to exit the program");
+
+            // please see UnitTest file
+        }
+    }
+
+    /*
     class Program
     {
         // based on the example here: https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/knowing-when-to-use-override-and-new-keywords 
@@ -47,7 +67,7 @@ namespace VirtualNewOverride
 
             List<BaseClass> lb = new List<BaseClass> { bc, dc, bcdc };
             // List<DerivedClass> ld = new List<DerivedClass> { bc, dc, bcdc};      // (line 24) can't do it
-            List < AbstractBaseClass > Ib = new List < AbstractBaseClass > { bc, dc, bcdc };
+            List<AbstractBaseClass> Ib = new List<AbstractBaseClass> { bc, dc, bcdc };
 
             #endregion
 
@@ -63,15 +83,15 @@ namespace VirtualNewOverride
         }
 
         abstract class AbstractBaseClass // can't be instantiates (can't create instance -- cac't call it)
-            // Abstract can't be 
+                                         // Abstract can't be 
         {
             protected int _abstractMemberItem;
-                // protected: ONLY class and DERIVED class can see it
-                // internal protected: can extend on it (giving module)
+            // protected: ONLY class and DERIVED class can see it
+            // internal protected: can extend on it (giving module)
 
             /// CUSTOMIZED Access Modifier: 
             public abstract void MustImplementedThis(); // used in the DerivedClass
-                // abstract class can't be virtual
+                                                        // abstract class can't be virtual
 
             public void MethodA()
             {
@@ -82,12 +102,12 @@ namespace VirtualNewOverride
         /// <summary>
         /// A base class which implements 2 functions 
         /// </summary>
-        class BaseClass: AbstractBaseClass
+        class BaseClass : AbstractBaseClass
         {
             #region 5 virtual 
             // step 5 - what effect does the virtual keyword have? 
             // the importance of new vs override in the derived class. 
-            public virtual void Method1() 
+            public virtual void Method1()
             {
                 Console.WriteLine("Base - Method1");
             }
@@ -98,6 +118,11 @@ namespace VirtualNewOverride
             public void Method2()
             {
                 Console.WriteLine("Base - Method2");
+            }
+
+            public override void MustImplementedThis()  // need to implement MustImplementedThis() from Abstract
+            {
+                throw new NotImplementedException();
             }
             #endregion
 
@@ -120,8 +145,8 @@ namespace VirtualNewOverride
             // #4 new 
             #endregion
 
-            public new void Method2() 
-            {                
+            public new void Method2()
+            {
                 Console.WriteLine("Derived - Method2");
             }
 
@@ -132,17 +157,5 @@ namespace VirtualNewOverride
             }
         }
     }
-
-    class Polymorphism
-    {
-        static void Main(string[] args)
-        {
-            DateTime Birthday = new DateTime (1999, 12, 31);
-            Person Me = new Person("Stavros", "Fakiolas", "fakiolass@stpaulsschool.org.uk", Birthday);
-            Debug.Assert(Me.ComputeAge(Birthday) == 22);
-
-            // please see UnitTest file
-        }
-    }
-
+    */
 }

@@ -10,13 +10,23 @@ namespace VirtualNewOverride
     public class Person
     {
         string _1stname, _2ndname, _email;
-        DateTime _DoB;
+        protected DateTime _DoB;
         // Timespan: difference between two time
 
         # region Notes: 
         // constructors can take in a old instance      --    Aliasing
         //      when equate new instance to old one, doesn't simply copy -- BOTH POINT to the data "block", 
         //      ONE updates, TWO refreshes data;
+        // priate setter can be only set in the CLASS
+        // protected: only class & DERIVED class
+        // readonly: only in CONSTRUCTOR
+
+
+        // Structs & int, string are VALUE types        --      copy
+                        // keyword ref make it REF types        copy to edit
+        // Objects are REFERENCE types      --      edit
+        // ICloneable -- return a copy
+        //               via the .Clone method
         # endregion
 
         public Person(string First, string Last, string email, DateTime DoB)
@@ -34,9 +44,14 @@ namespace VirtualNewOverride
             _DoB = dOb;
         }
 
-        public int ComputeAge(DateTime DoB)
+        public DateTime DateOfBirth
         {
-            return Convert.ToInt32(DateTime.Now - DoB);
+            get {   return _DoB; }
+        }
+
+        public TimeSpan ComputeAge()
+        {
+            return (DateTime.Now - _DoB);
         }
 
         public bool ConfirmAge(TimeSpan age)
@@ -54,9 +69,15 @@ namespace VirtualNewOverride
             return Convert.ToInt32(age) >= 18;
         }
 
-        public string Zodiac(DateTime DoB)
+        public string Zodiac()
         {
-            return Convert.ToString(生肖.子);
+            int Year = _DoB.Year;    // .Year O/P integer
+            int ZodiacCounter = Year % 12;
+
+            // 1900, 2020: Year of Mouse; 1970: Year of Dog     12 | 1968 (Monkey 164)
+
+            生肖 YourCHZodiac = (生肖)ZodiacCounter;
+            return Convert.ToString(YourCHZodiac);
         }
 
         public string GenerateScrnName(Person User)
@@ -64,15 +85,16 @@ namespace VirtualNewOverride
             string DOBSeries = Convert.ToString(_DoB);
             string FirstLetter = Convert.ToString(_1stname);
             // need to adjust the type
-            return Convert.ToString(_2ndname) + Convert.ToString(_1stname) + DOBSeries;
+            return (Convert.ToString(_2ndname) + Convert.ToString(_1stname) + DOBSeries);
         }
     }
 
-    public enum 生肖
+    public enum 生肖  // means Chinese Zodiac
     {
         // 1900, 2020 is the year of rat, so just 0
 
-        子, 丑, 寅, 卯, 辰, 巳, 午, 未, 申, 酉, 戌, 亥
-    //  鼠  牛  虎  兔  龙  蛇  马  羊  猴  鸡  狗  猪
+        申, 酉, 戌, 亥, 子, 丑, 寅, 卯, 辰, 巳, 午, 未
+    //  猴  鸡  狗  猪  鼠  牛  虎  兔  龙  蛇  马  羊
+    //  monkey       | rat                snake   sheep
     }
 }

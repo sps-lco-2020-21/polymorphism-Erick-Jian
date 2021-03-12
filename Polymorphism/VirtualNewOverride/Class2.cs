@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace VirtualNewOverride
 {
+    /*
     abstract class Students: Person
     {
 
@@ -15,4 +16,5 @@ namespace VirtualNewOverride
     {
 
     }
+    */
 }
