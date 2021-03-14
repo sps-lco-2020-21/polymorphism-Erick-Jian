@@ -15,20 +15,23 @@ namespace VirtualNewOverride
         static void Main(string[] args)
         {
             DateTime Birthday = new DateTime (2004, 3, 16);
-            Person Me = new Person("Stavros", "Fakiolas", "fakiolass@stpaulsschool.org.uk", Birthday);
+            Student Me = new Student("Stavros", "Fakiolas", "fakiolass@stpaulsschool.org.uk", Birthday);
             Person CloneMe = Me;
 
-            Console.WriteLine(Me.ChineseZodiac());
-            Debug.Assert((int)Me.ComputeAge().TotalDays / 365 == 17);
+            Console.WriteLine(Me.ChineseZodiac());  // O/P "申" -- (Year of) Monkey
+
+            decimal RawYear = (int)Me.GetAge / 365;
+            int ProcessedRawYear = (int)Math.Truncate(RawYear);
+            Debug.Assert( ProcessedRawYear == 17);
+
 
             while (Console.ReadKey().Key != ConsoleKey.Escape)
                 Console.WriteLine("press [Esc] to exit the program");
 
-            // please see UnitTest file
+            // please see UnitTest file for more
         }
     }
 
-    /*
     class Program
     {
         // based on the example here: https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/knowing-when-to-use-override-and-new-keywords 
@@ -157,5 +160,4 @@ namespace VirtualNewOverride
             }
         }
     }
-    */
 }
