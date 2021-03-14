@@ -18,7 +18,7 @@ namespace VirtualNewOverride
             Person Me = new Person("Stavros", "Fakiolas", "fakiolass@stpaulsschool.org.uk", Birthday);
             Person CloneMe = Me;
 
-            Console.WriteLine(Me.Zodiac());
+            Console.WriteLine(Me.ChineseZodiac());
             Debug.Assert((int)Me.ComputeAge().TotalDays / 365 == 17);
 
             while (Console.ReadKey().Key != ConsoleKey.Escape)
